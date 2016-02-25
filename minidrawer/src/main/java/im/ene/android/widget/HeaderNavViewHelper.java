@@ -22,7 +22,7 @@ import android.view.View;
 /**
  * Created by eneim on 2/23/16.
  */
-public class HeaderNavViewHelper extends NavItemViewHelper {
+public class HeaderNavViewHelper extends MenuItemHelper {
 
   // NavigationMenuPresenter$SeparatorViewHolder
   // in this case, just use itemView
@@ -33,7 +33,8 @@ public class HeaderNavViewHelper extends NavItemViewHelper {
 
   // Since header view is highly customizable, it is recommended that client of this View extends
   // this class and override this method for custom behavior
-  @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
+  @Override protected void onDrawerOffset(int groupId, int itemId,
+      @FloatRange(from = 0.f, to = 1.f) float offset) {
     if (itemView != null) {
       // do something
     }

@@ -32,6 +32,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.design.internal.NavigationMenu;
+import android.support.design.internal.NavigationMenuItemView;
 import android.support.design.internal.NavigationMenuPresenter;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.internal.ScrimInsetsFrameLayout;
@@ -212,9 +213,15 @@ public class NavigationView extends ScrimInsetsFrameLayout {
     int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
     for (int i = firstVisibleItem; i <= lastVisibleItem; i++) {
       RecyclerView.ViewHolder viewHolder = mMenuView.findViewHolderForAdapterPosition(i);
+      int itemId = -1;
+      int groupId = -1;
       if (viewHolder != null) {
-        getItemViewHelperInternal(viewHolder,
-            0 /* mMenu.getVisibleItems().get(i).getItemId() */).onDrawerOffset(offset);
+        if (viewHolder.itemView instanceof NavigationMenuItemView) {
+          MenuItemImpl item = ((NavigationMenuItemView) viewHolder.itemView).getItemData();
+          itemId = item.getItemId();
+          groupId = item.getGroupId();
+        }
+        getItemViewHelperInternal(viewHolder).onDrawerOffset(groupId, itemId, offset);
       }
     }
   }
@@ -231,16 +238,15 @@ public class NavigationView extends ScrimInsetsFrameLayout {
   @Retention(RetentionPolicy.SOURCE) protected @interface ItemViewType {
   }
 
-  private final Map<Integer, NavItemViewHelper> mItemHelpers = new HashMap<>();
+  private final Map<Integer, MenuItemHelper> mItemHelpers = new HashMap<>();
 
   // Client should override this and give their custom Helper
-  protected NavItemViewHelper getItemViewHelper(@ItemViewType int viewType, View holder) {
+  protected MenuItemHelper getItemViewHelper(@ItemViewType int viewType, View holder) {
     return null;
   }
 
-  @NonNull final NavItemViewHelper getItemViewHelperInternal(RecyclerView.ViewHolder viewHolder,
-      int menuItemId) {
-    NavItemViewHelper helper = mItemHelpers.get(viewHolder.getAdapterPosition());
+  @NonNull final MenuItemHelper getItemViewHelperInternal(RecyclerView.ViewHolder viewHolder) {
+    MenuItemHelper helper = mItemHelpers.get(viewHolder.getAdapterPosition());
     if (helper != null) {
       return helper;
     }

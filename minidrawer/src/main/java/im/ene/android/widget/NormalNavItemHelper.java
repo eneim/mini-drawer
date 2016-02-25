@@ -26,7 +26,7 @@ import android.widget.TextView;
 /**
  * Created by eneim on 2/23/16.
  */
-public class NormalNavItemHelper extends NavItemViewHelper {
+public class NormalNavItemHelper extends MenuItemHelper {
 
   private static final int TEXT_VIEW_ID = R.id.design_menu_item_text;
   private static final int ACTION_VIEW_ID = R.id.design_menu_item_action_area_stub;
@@ -47,7 +47,8 @@ public class NormalNavItemHelper extends NavItemViewHelper {
     mTextColor = textView.getTextColors();
   }
 
-  @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
+  @Override protected void onDrawerOffset(int groupId, int itemId,
+      @FloatRange(from = 0.f, to = 1.f) float offset) {
     float value = AnimationUtils.ACCELERATE_DECELERATE.getInterpolation(offset);
 
     if (this.textView != null) {

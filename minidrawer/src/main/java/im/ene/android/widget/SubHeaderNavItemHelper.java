@@ -24,7 +24,7 @@ import android.widget.TextView;
 /**
  * Created by eneim on 2/23/16.
  */
-public class SubHeaderNavItemHelper extends NavItemViewHelper {
+public class SubHeaderNavItemHelper extends MenuItemHelper {
 
   // in this case, itemView itself it a TextView
   private final TextView textView;
@@ -38,7 +38,8 @@ public class SubHeaderNavItemHelper extends NavItemViewHelper {
     viewHeight = itemView.getLayoutParams().height;
   }
 
-  @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
+  @Override protected void onDrawerOffset(int groupId, int itemId,
+      @FloatRange(from = 0.f, to = 1.f) float offset) {
     float value = AnimationUtils.ACCELERATE_DECELERATE.getInterpolation(offset);
 
     if (this.textView != null) {

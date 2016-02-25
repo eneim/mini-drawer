@@ -22,13 +22,15 @@ import android.view.View;
 /**
  * Created by eneim on 2/23/16.
  */
-public abstract class NavItemViewHelper {
+public abstract class MenuItemHelper {
 
   protected final View itemView;
 
-  public NavItemViewHelper(View itemView) {
+  public MenuItemHelper(View itemView) {
     this.itemView = itemView;
   }
 
-  protected abstract void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset);
+  protected abstract void onDrawerOffset(int groupId, int itemId,
+      @FloatRange(from = 0.f, to = 1.f) float offset);
+
 }

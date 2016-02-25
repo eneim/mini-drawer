@@ -27,7 +27,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import im.ene.android.widget.HeaderNavViewHelper;
-import im.ene.android.widget.NavItemViewHelper;
+import im.ene.android.widget.MenuItemHelper;
 import im.ene.android.widget.NavigationView;
 import im.ene.lab.sample.minidrawer.R;
 
@@ -47,7 +47,7 @@ public class GmailNaviView extends NavigationView {
     super(context, attrs, defStyleAttr);
   }
 
-  @Override protected NavItemViewHelper getItemViewHelper(int viewType, View holder) {
+  @Override protected MenuItemHelper getItemViewHelper(int viewType, View holder) {
     if (viewType == VIEW_TYPE_HEADER) {
       return new HeaderViewHelper(holder);
     }
@@ -81,8 +81,9 @@ public class GmailNaviView extends NavigationView {
       iconMinSize = itemView.getResources().getDimensionPixelSize(R.dimen.header_icon_size_min);
     }
 
-    @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
-      super.onDrawerOffset(offset);
+    @Override protected void onDrawerOffset(int groupId, int itemId,
+        @FloatRange(from = 0.f, to = 1.f) float offset) {
+      super.onDrawerOffset(groupId, itemId, offset);
       float value = sAccelerate.getInterpolation(offset);
       // offset = 0 --> width = minSize;
       // offset = 1 --> width = maxSize;

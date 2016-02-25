@@ -23,7 +23,7 @@ import android.view.View;
 /**
  * Created by eneim on 2/23/16.
  */
-public class SeparatorNavViewHelper extends NavItemViewHelper {
+public class SeparatorNavViewHelper extends MenuItemHelper {
 
   // NavigationMenuPresenter$SeparatorViewHolder
   // in this case, just use itemView
@@ -32,7 +32,8 @@ public class SeparatorNavViewHelper extends NavItemViewHelper {
     super(itemView);
   }
 
-  @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
+  @Override protected void onDrawerOffset(int groupId, int itemId,
+      @FloatRange(from = 0.f, to = 1.f) float offset) {
     if (itemView != null) {
       ViewCompat.setAlpha(itemView, AnimationUtils.ACCELERATE_DECELERATE.getInterpolation(offset));
     }
