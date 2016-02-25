@@ -39,14 +39,12 @@ public class SubHeaderNavItemHelper extends NavItemViewHelper {
   }
 
   @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
-    float newValue = AnimationUtils.ACCELERATE_INTERPOLATOR.getInterpolation(offset);
-
     if (this.textView != null) {
-      this.textView.setTextColor(this.textView.getTextColors().withAlpha((int) (newValue * 255)));
+      this.textView.setTextColor(this.textView.getTextColors().withAlpha((int) (offset * 255)));
     }
 
     ViewGroup.LayoutParams params = itemView.getLayoutParams();
-    params.height = (int) (viewHeight * newValue);
+    params.height = (int) (viewHeight * offset);
     itemView.setLayoutParams(params);
   }
 }

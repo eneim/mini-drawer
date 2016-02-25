@@ -48,29 +48,14 @@
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
 
-    <FrameLayout
+    <im.ene.lab.sample.minidrawer.widget.GmailNaviView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        >
-      <im.ene.lab.sample.minidrawer.widget.GmailNaviView
-          android:id="@+id/nav_view"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          app:headerLayout="@layout/nav_header_drawer"
-          app:menu="@menu/activity_drawer_drawer"
-          />
-
-      <!--<LinearLayout-->
-          <!--android:id="@+id/collapsed_menu"-->
-          <!--android:layout_width="@dimen/drawer_collapse_size"-->
-          <!--android:layout_height="match_parent"-->
-          <!--android:background="#cce35444"-->
-          <!--android:orientation="vertical"-->
-          <!--&gt;-->
-
-      <!--</LinearLayout>-->
-    </FrameLayout>
+        app:headerLayout="@layout/nav_header_drawer"
+        app:menu="@menu/activity_drawer_drawer"
+        />
 
     <FrameLayout
         android:layout_width="match_parent"
