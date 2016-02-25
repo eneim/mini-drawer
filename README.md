@@ -5,3 +5,5 @@
 Another cool UI library.
 
 Especially for Gmail App lover.
+
+***!WARNING: Very pre-alpha stage, don't touch this. You have been WARNED!***
