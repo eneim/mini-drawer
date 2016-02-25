@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+  <android.support.design.widget.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay"
+      >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        />
+
+  </android.support.design.widget.AppBarLayout>
+
+  <im.ene.android.widget.MiniDrawerLayout
+      android:id="@+id/drawer_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:collapseWidth="@dimen/drawer_collapse_size"
+      app:expandWidth="300dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        >
+      <im.ene.lab.sample.minidrawer.widget.GmailNaviView
+          android:id="@+id/nav_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:headerLayout="@layout/nav_header_drawer"
+          app:menu="@menu/activity_drawer_drawer"
+          />
+
+      <!--<LinearLayout-->
+          <!--android:id="@+id/collapsed_menu"-->
+          <!--android:layout_width="@dimen/drawer_collapse_size"-->
+          <!--android:layout_height="match_parent"-->
+          <!--android:background="#cce35444"-->
+          <!--android:orientation="vertical"-->
+          <!--&gt;-->
+
+      <!--</LinearLayout>-->
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#f5f5f5"
+        android:fitsSystemWindows="true"
+        >
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recycler_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          />
+    </FrameLayout>
+
+  </im.ene.android.widget.MiniDrawerLayout>
+
+</android.support.design.widget.CoordinatorLayout>

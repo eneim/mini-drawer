@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Widget.Eneim.MiniDrawer" parent="android:Widget">
+    <item name="collapseWidth">@dimen/mini_drawer_collapse_width</item>
+    <item name="expandWidth">@dimen/mini_drawer_expand_width</item>
+  </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="mini_drawer_collapse_width">?attr/actionBarSize</dimen>
+  <dimen name="mini_drawer_expand_width">300dp</dimen>
+
+  <dimen name="addition_elevation">4dp</dimen>
+</resources>
