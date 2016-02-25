@@ -17,6 +17,8 @@
 package im.ene.lab.sample.minidrawer;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.animation.PathInterpolatorCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
 import android.widget.TextView;
 import im.ene.android.widget.ActionBarDrawerToggle;
 import im.ene.android.widget.MiniDrawerLayout;
@@ -38,7 +41,9 @@ public class MainActivity extends AppCompatActivity
   MiniDrawerLayout mDrawer;
   RecyclerView mRecyclerView;
 
-  // View mCollapsedMenu;
+  View mCollapsedMenu;
+
+  private final Interpolator sLnOutSlowIn = PathInterpolatorCompat.create(0.4f, 0.f, 0.2f, 1.f);
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     mNavView = (NavigationView) findViewById(R.id.nav_view);
     mNavView.setNavigationItemSelectedListener(this);
 
-    // mCollapsedMenu = findViewById(R.id.collapsed_menu);
+    mCollapsedMenu = findViewById(R.id.collapsed_menu);
 
     mDrawer = (MiniDrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -62,10 +67,9 @@ public class MainActivity extends AppCompatActivity
           mNavView.onDrawerOffset(slideOffset);
         }
 
-        //if (mCollapsedMenu != null) {
-        //  mCollapsedMenu.setAlpha(
-        //      1 - AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR.getInterpolation(slideOffset));
-        //}
+        if (mCollapsedMenu != null) {
+          ViewCompat.setAlpha(mCollapsedMenu, 1.f - sLnOutSlowIn.getInterpolation(slideOffset));
+        }
       }
 
       @Override public void onDrawerOpened(View drawerView) {

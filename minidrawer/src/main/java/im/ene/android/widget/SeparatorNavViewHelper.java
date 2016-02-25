@@ -17,6 +17,7 @@
 package im.ene.android.widget;
 
 import android.support.annotation.FloatRange;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
 /**
@@ -33,7 +34,7 @@ public class SeparatorNavViewHelper extends NavItemViewHelper {
 
   @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
     if (itemView != null) {
-      itemView.setAlpha(offset);
+      ViewCompat.setAlpha(itemView, AnimationUtils.ACCELERATE_DECELERATE.getInterpolation(offset));
     }
   }
 }

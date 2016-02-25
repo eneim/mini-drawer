@@ -19,9 +19,12 @@ package im.ene.lab.sample.minidrawer.widget;
 import android.content.Context;
 import android.support.annotation.FloatRange;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import im.ene.android.widget.HeaderNavViewHelper;
 import im.ene.android.widget.NavItemViewHelper;
@@ -57,6 +60,8 @@ public class GmailNaviView extends NavigationView {
     @Nullable final ImageView mIcon;
     @Nullable final View mTitleContainer;
 
+    private final Interpolator sAccelerate = new AccelerateInterpolator();
+
     private final int itemHeight;
     private final int contentHeight;
     private final int iconMaxSize;
@@ -70,28 +75,29 @@ public class GmailNaviView extends NavigationView {
       itemHeight = itemView.getHeight();
       contentHeight = mTitleContainer.getHeight();
 
-      mIcon.setPivotX(0);
-      mIcon.setPivotY(mIcon.getHeight());
+      ViewCompat.setPivotX(mIcon, 0);
+      ViewCompat.setPivotY(mIcon, mIcon.getHeight());
       iconMaxSize = mIcon.getWidth();
       iconMinSize = itemView.getResources().getDimensionPixelSize(R.dimen.header_icon_size_min);
     }
 
     @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
       super.onDrawerOffset(offset);
+      float value = sAccelerate.getInterpolation(offset);
       // offset = 0 --> width = minSize;
       // offset = 1 --> width = maxSize;
-      float scale = (iconMaxSize * offset + iconMinSize * (1.f - offset)) / iconMaxSize;
+      float scale = (iconMaxSize * value + iconMinSize * (1.f - value)) / iconMaxSize;
       if (mIcon != null) {
-        mIcon.setScaleX(scale);
-        mIcon.setScaleY(scale);
+        ViewCompat.setScaleX(mIcon, scale);
+        ViewCompat.setScaleY(mIcon, scale);
       }
 
       if (mTitleContainer != null) {
-        mTitleContainer.setAlpha(offset);
+        ViewCompat.setAlpha(mTitleContainer, value);
       }
 
       ViewGroup.LayoutParams params = itemView.getLayoutParams();
-      params.height = itemHeight - (int) (contentHeight * (1.f - offset));
+      params.height = itemHeight - (int) (contentHeight * (1.f - value));
       itemView.setLayoutParams(params);
     }
   }

@@ -48,12 +48,14 @@ public class NormalNavItemHelper extends NavItemViewHelper {
   }
 
   @Override protected void onDrawerOffset(@FloatRange(from = 0.f, to = 1.f) float offset) {
+    float value = AnimationUtils.ACCELERATE_DECELERATE.getInterpolation(offset);
+
     if (this.textView != null) {
-      this.textView.setTextColor(mTextColor.withAlpha((int) (offset * 255)));
+      this.textView.setTextColor(mTextColor.withAlpha((int) (value * 255)));
     }
 
     if (actionArea != null) {
-      ViewCompat.setAlpha(actionArea, offset);
+      ViewCompat.setAlpha(actionArea, value);
     }
   }
 }
